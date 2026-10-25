@@ -1,0 +1,719 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Nikah Invitation</title>
+
+<style>
+:root {
+  --red: #8B001B;
+  --deep-red: #35000B;
+  --gold: #D4AF61;
+  --pale-gold: #FFF0C2;
+  --cream: #FFF6E4;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--deep-red);
+  color: var(--cream);
+  font-family: Georgia, "Times New Roman", serif;
+  overflow-x: hidden;
+}
+
+#welcome {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background: radial-gradient(ellipse at center, #8B001B, #4B0010 55%, #210007);
+  animation: fadeIn 1.2s ease both;
+}
+
+.welcome-card {
+  width: min(650px, 100%);
+  padding: 45px 25px;
+  border: 1px solid var(--gold);
+  outline: 1px solid rgba(212,175,97,.35);
+  outline-offset: 8px;
+  animation: riseIn 1.2s ease both;
+}
+
+.ornament {
+  color: var(--gold);
+  font-size: 30px;
+  margin-bottom: 15px;
+  animation: glow 3s ease-in-out infinite;
+}
+
+.eyebrow {
+  color: var(--pale-gold);
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+h1, h2, h3 {
+  font-weight: normal;
+}
+
+.welcome-card h1 {
+  color: var(--pale-gold);
+  font-size: clamp(36px, 7vw, 68px);
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+
+.welcome-card p {
+  color: #F8DEB0;
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.gold-line {
+  width: 100px;
+  height: 1px;
+  margin: 24px auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.primary-btn {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  background: linear-gradient(135deg, #F8E5AA, #C59A45);
+  color: #41000D;
+  padding: 15px 27px;
+  margin-top: 27px;
+  font-family: inherit;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: .35s ease;
+  box-shadow: 0 5px 25px rgba(0,0,0,.18);
+}
+
+.primary-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(212,175,97,.25);
+  background: var(--cream);
+}
+
+#invitation {
+  display: none;
+  min-height: 100vh;
+  padding: 22px;
+  animation: fadeIn 1s ease both;
+}
+
+.invitation-shell {
+  max-width: 1250px;
+  margin: auto;
+  border: 1px solid var(--gold);
+  position: relative;
+  overflow: hidden;
+  background: #43000F;
+}
+
+.invitation-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(43,0,9,.94),
+      rgba(75,0,17,.82),
+      rgba(43,0,9,.91)),
+    url("https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1800&q=85")
+    center 40% / cover no-repeat;
+  animation: backgroundZoom 22s ease-in-out infinite alternate;
+}
+
+.invitation-shell::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(212,175,97,.5);
+  pointer-events: none;
+}
+
+.invitation-content {
+  position: relative;
+  z-index: 1;
+  padding: 45px;
+}
+
+.top-label {
+  text-align: center;
+  color: var(--gold);
+  letter-spacing: 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.hero {
+  min-height: 390px;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 30px;
+  padding: 25px 4%;
+}
+
+.hero-copy {
+  text-align: center;
+  animation: slideLeft 1.1s ease both;
+}
+
+.hero-copy .bismillah {
+  font-size: 24px;
+  color: var(--pale-gold);
+  margin-bottom: 25px;
+}
+
+.hero-copy h1 {
+  font-size: clamp(42px, 5.5vw, 76px);
+  line-height: 1.12;
+  color: var(--pale-gold);
+  text-shadow: 0 4px 25px rgba(0,0,0,.3);
+}
+
+.ampersand {
+  display: block;
+  font-style: italic;
+  font-size: .65em;
+  color: var(--gold);
+  margin: 7px 0;
+}
+
+.hero-copy .subtitle {
+  color: #F4DDAA;
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin-top: 22px;
+  line-height: 1.8;
+}
+
+.hero-art {
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideRight 1.3s ease both;
+}
+
+.moon-frame {
+  width: min(310px, 100%);
+  aspect-ratio: 4 / 4.6;
+  border: 1px solid var(--gold);
+  padding: 12px;
+  border-radius: 48% 48% 5px 5px;
+  background: rgba(53,0,11,.32);
+  position: relative;
+  box-shadow: 0 0 45px rgba(212,175,97,.12);
+}
+
+.moon-frame::before {
+  content: "✦  ✧  ✦";
+  position: absolute;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: var(--pale-gold);
+  letter-spacing: 12px;
+  z-index: 2;
+}
+
+.moon-inner {
+  height: 100%;
+  border-radius: 48% 48% 2px 2px;
+  border: 1px solid rgba(212,175,97,.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(212,175,97,.2), transparent 45%),
+    linear-gradient(180deg, rgba(139,0,27,.65), rgba(40,0,9,.65));
+}
+
+.moon-inner .crescent {
+  font-size: 48px;
+  color: var(--pale-gold);
+  margin-bottom: 12px;
+  animation: glow 3s ease-in-out infinite;
+}
+
+.moon-inner p {
+  color: var(--pale-gold);
+  line-height: 1.8;
+  font-size: 13px;
+}
+
+.section {
+  border-top: 1px solid rgba(212,175,97,.45);
+  padding: 35px 5%;
+  text-align: center;
+  animation: riseIn 1s ease both;
+}
+
+.section-kicker {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.section h2 {
+  color: var(--pale-gold);
+  font-size: clamp(25px, 4vw, 38px);
+  margin-bottom: 15px;
+}
+
+.section p {
+  line-height: 1.9;
+  color: #F5E4C7;
+  font-size: 14px;
+}
+
+.details-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 28px;
+  border: 1px solid rgba(212,175,97,.5);
+}
+
+.detail {
+  padding: 25px 12px;
+}
+
+.detail + .detail {
+  border-left: 1px solid rgba(212,175,97,.5);
+}
+
+.detail .symbol {
+  color: var(--gold);
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.detail h3 {
+  color: var(--pale-gold);
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.detail p {
+  font-size: 13px;
+}
+
+.venue-panel {
+  max-width: 780px;
+  margin: 25px auto 0;
+  padding: 28px 20px;
+  position: relative;
+  border: 1px solid var(--gold);
+  background: linear-gradient(135deg, rgba(139,0,27,.75), rgba(45,0,9,.8));
+  box-shadow: 0 12px 40px rgba(0,0,0,.18);
+}
+
+.venue-panel::before,
+.venue-panel::after {
+  content: "✧";
+  position: absolute;
+  color: var(--gold);
+  font-size: 24px;
+}
+
+.venue-panel::before {
+  top: 8px;
+  left: 12px;
+}
+
+.venue-panel::after {
+  bottom: 8px;
+  right: 12px;
+}
+
+.venue-panel h3 {
+  color: var(--pale-gold);
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.venue-panel p {
+  margin-bottom: 15px;
+}
+
+.map-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  color: var(--pale-gold);
+  border: 1px solid var(--gold);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 1px;
+  transition: .3s;
+}
+
+.map-btn:hover {
+  background: var(--gold);
+  color: var(--deep-red);
+  transform: translateY(-3px);
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.time-box {
+  min-width: 85px;
+  padding: 15px 10px;
+  border: 1px solid rgba(212,175,97,.6);
+  background: rgba(30,0,7,.2);
+}
+
+.time-box strong {
+  display: block;
+  font-size: 28px;
+  color: var(--pale-gold);
+  font-weight: normal;
+}
+
+.time-box span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-top: 5px;
+}
+
+.dua {
+  font-size: 19px !important;
+  color: var(--pale-gold) !important;
+  line-height: 2 !important;
+  margin: 18px auto;
+  max-width: 800px;
+}
+
+.footer {
+  border-top: 1px solid rgba(212,175,97,.45);
+  text-align: center;
+  padding: 25px 15px;
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 2px;
+  line-height: 2;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(-28px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(28px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 5px rgba(212,175,97,.2); }
+  50% { text-shadow: 0 0 22px rgba(255,230,160,.65); }
+}
+
+@keyframes backgroundZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.09); }
+}
+
+@media (min-width: 900px) {
+  .invitation-content {
+    padding: 45px 65px;
+  }
+}
+
+@media (max-width: 700px) {
+  #invitation {
+    padding: 10px;
+  }
+
+  .invitation-content {
+    padding: 35px 22px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 15px 0 25px;
+  }
+
+  .hero-art {
+    min-height: 250px;
+  }
+
+  .moon-frame {
+    width: 220px;
+  }
+
+  .details-row {
+    grid-template-columns: 1fr;
+  }
+
+  .detail + .detail {
+    border-left: 0;
+    border-top: 1px solid rgba(212,175,97,.5);
+  }
+
+  .top-label {
+    letter-spacing: 3px;
+    line-height: 1.8;
+  }
+
+  .section {
+    padding: 30px 4%;
+  }
+
+  .time-box {
+    min-width: 70px;
+  }
+
+  .time-box strong {
+    font-size: 23px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<section id="welcome">
+  <div class="welcome-card">
+    <div class="ornament">✧ ❖ ✧</div>
+    <p class="eyebrow">Together with our families</p>
+    <h1>A Royal<br>Nikah Invitation</h1>
+    <div class="gold-line"></div>
+    <p>
+      In the name of Allah, the Most Merciful,<br>
+      we invite you to share our happiness<br>
+      and bless our new beginning.
+    </p>
+    <button class="primary-btn" onclick="openInvite()">
+      Open Invitation ✦
+    </button>
+  </div>
+</section>
+
+<main id="invitation">
+  <div class="invitation-shell">
+    <div class="invitation-content">
+
+      <p class="top-label">✧ Bismillah-ir-Rahman-ir-Raheem ✧</p>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+          <p class="eyebrow">The Wedding Ceremony of</p>
+          <h1>
+            Aarav
+            <span class="ampersand">&amp;</span>
+            Meher
+          </h1>
+          <p class="subtitle">
+            A BEAUTIFUL BEGINNING<br>
+            A BOND BLESSED BY ALLAH
+          </p>
+        </div>
+
+        <div class="hero-art">
+          <div class="moon-frame">
+            <div class="moon-inner">
+              <div class="crescent">☾</div>
+              <p>Two hearts<br>One beautiful journey</p>
+              <div class="gold-line"></div>
+              <p>With prayers and blessings</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-kicker">With gratitude to Allah</p>
+        <h2>Request the Honour of Your Presence</h2>
+        <p>
+          Together with our families, we warmly invite you
+          to join us as we begin this blessed journey of Nikah.
+          Your presence and duas will make our day more special.
+        </p>
+
+        <div class="details-row">
+          <div class="detail">
+            <div class="symbol">☾</div>
+            <h3>Nikah Ceremony</h3>
+            <p>15 December 2026</p>
+          </div>
+
+          <div class="detail">
+            <div class="symbol">✧</div>
+            <h3>Time</h3>
+            <p>7:00 PM onwards</p>
+          </div>
+
+          <div class="detail">
+            <div class="symbol">❖</div>
+            <h3>Celebration</h3>
+            <p>With family &amp; friends</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-kicker">The place of celebration</p>
+        <h2>Join Us at Our Venue</h2>
+
+        <div class="venue-panel">
+          <div class="symbol">⌖</div>
+          <h3>Royal Banquet Hall</h3>
+          <p>Lucknow, Uttar Pradesh, India</p>
+          <a class="map-btn"
+             href="https://www.google.com/maps"
+             target="_blank"
+             rel="noopener">
+            ⌖ VIEW LOCATION ON MAP
+          </a>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-kicker">The countdown begins</p>
+        <h2>Until Our Special Day</h2>
+        <p>Counting the moments until we celebrate together.</p>
+
+        <div class="countdown">
+          <div class="time-box">
+            <strong id="days">00</strong>
+            <span>DAYS</span>
+          </div>
+          <div class="time-box">
+            <strong id="hours">00</strong>
+            <span>HOURS</span>
+          </div>
+          <div class="time-box">
+            <strong id="minutes">00</strong>
+            <span>MINUTES</span>
+          </div>
+          <div class="time-box">
+            <strong id="seconds">00</strong>
+            <span>SECONDS</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-kicker">A prayer for our new beginning</p>
+        <h2>Your Duas Mean Everything</h2>
+        <p class="dua">
+          May Allah bless this union with love, mercy,
+          understanding and endless barakah. Ameen.
+        </p>
+        <div class="ornament">✧ ❖ ✧</div>
+      </section>
+
+      <footer class="footer">
+        WITH LOVE, PRAYERS &amp; GRATITUDE<br>
+        PLEASE JOIN US IN OUR HAPPINESS
+      </footer>
+
+    </div>
+  </div>
+</main>
+
+<script>
+function openInvite() {
+  const welcome = document.getElementById("welcome");
+  const invitation = document.getElementById("invitation");
+
+  welcome.style.transition = "opacity .6s ease, transform .6s ease";
+  welcome.style.opacity = "0";
+  welcome.style.transform = "scale(1.03)";
+
+  setTimeout(() => {
+    welcome.style.display = "none";
+    invitation.style.display = "block";
+    invitation.style.animation = "fadeIn 1s ease both";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    updateCountdown();
+  }, 600);
+}
+
+const weddingDate = new Date("2026-12-15T19:00:00").getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const difference = weddingDate - now;
+
+  if (difference <= 0) {
+    document.getElementById("days").textContent = "00";
+    document.getElementById("hours").textContent = "00";
+    document.getElementById("minutes").textContent = "00";
+    document.getElementById("seconds").textContent = "00";
+    return;
+  }
+
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((difference / (1000 * 60)) % 60);
+  const seconds = Math.floor((difference / 1000) % 60);
+
+  document.getElementById("days").textContent = String(days).padStart(2, "0");
+  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
+
+</body>
+  </html>
